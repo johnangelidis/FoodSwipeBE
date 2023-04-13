@@ -27,7 +27,8 @@ let recipeSchema = new Schema({
         required: false
     }
 }, {
-    timestamps: true,
+    timestamps: false,
+    _id: false
 });
 
-module.exports = mongoose.Model('Recipe', recipeSchema);
+module.exports = recipeSchema;

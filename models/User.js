@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+const recipeSchema = require("../models/Recipe")
 let userSchema = new Schema({
     name: {
         type: String,
@@ -12,6 +12,10 @@ let userSchema = new Schema({
     },
     password: {
         type: String,
+        required: true
+    },
+    savedRecipes: {
+        type: [recipeSchema],
         required: true
     }
 }, {

@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const { createJWT } = require('../utils/auth');
 
 exports.register = (req, res , next) => {
-    let { name, email, password, passwordConfirmation } = req.body;
+    let { name, email, password, passwordConfirmation, savedRecipes } = req.body;
     let errors = [];
     if (!name) {
         errors.push({ name: "required" });
@@ -20,6 +20,9 @@ exports.register = (req, res , next) => {
         errors.push({
          passwordConfirmation: "required",
         });
+      }
+      if (!savedRecipes) {
+        errors.push({ savedRecipes: "required" });
       }
       if (password != passwordConfirmation) {
         errors.push({ password: "mismatch" });
@@ -40,6 +43,7 @@ exports.register = (req, res , next) => {
                 name: name,
                 email: email,
                 password: hash,
+                savedRecipes: savedRecipes
             });
             user.save().then(response => {
                 res.status(200).json({
