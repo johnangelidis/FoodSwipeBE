@@ -29,17 +29,22 @@ const saveRecipe = (req, res) => {
     if (!recipe) {
         errors.push({ recipe: "required" });
     }
-
     User.findOneAndUpdate(
-        {_id: userId},
-        { $push: {savedRecipes: recipe}},
-        { new: true}
-    ).then(updatedUser => {
-        res.status(200).json(updatedUser);
-    }).catch(err => {
-        console.error(err);
-        res.status(500).send('Internal Server Error');
-    });
+        { _id: userId, recipe: { $ne: recipe.id } },
+        { $addToSet: { savedRecipes: recipe } },
+        { new: true }
+      )
+        .then((updatedUser) => {
+          if (updatedUser) {
+            res.status(200).json(updatedUser);
+          } else {
+            res.status(404).send("User not found");
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+          res.status(500).send("Internal Server Error");
+        });
 }
 
 const removeRecipe = (req, res) => {
