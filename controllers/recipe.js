@@ -36,7 +36,7 @@ const saveRecipe = (req, res) => {
       )
         .then((updatedUser) => {
           if (updatedUser) {
-            res.status(200).json(updatedUser);
+            res.status(200).json(updatedUser.savedRecipes);
           } else {
             res.status(404).send("User not found");
           }
