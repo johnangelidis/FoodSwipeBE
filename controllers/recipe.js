@@ -1,7 +1,7 @@
 const User = require("../models/User")
 
 const getUserRecipes = (req, res) => {
-    let { userId } = req.body;
+    let { userId } = req.query;
 
     let errors = [];
     if (!userId) {
