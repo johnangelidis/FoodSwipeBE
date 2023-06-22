@@ -65,7 +65,8 @@ const removeRecipe = (req, res) => {
             }
         }},
         {new: true}
-    ).then(updatedUser => {
+    )
+    .then(updatedUser => {
         res.status(200).json(updatedUser.savedRecipes);
     }).catch(err => {
         console.error(err);

@@ -5,6 +5,6 @@ const {getUserRecipes, saveRecipe, removeRecipe} = require('../controllers/recip
 
 router.get('/recipes', getUserRecipes);
 router.put('/save', saveRecipe);
-router.delete('/delete', removeRecipe);
+router.post('/delete', removeRecipe);
 
 module.exports = router;
